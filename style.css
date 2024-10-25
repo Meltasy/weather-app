@@ -114,11 +114,9 @@ form button {
     grid-row: 3;
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: min-content;
+    grid-auto-columns: max-content;
     overflow: auto;
-    border-top: 2px solid var(--primary-color);
-    border-right: 2px solid var(--primary-color);
-    border-left: 2px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     box-shadow: 2px 2px 2px var(--primary-color-shadow);

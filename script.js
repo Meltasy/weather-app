@@ -57,7 +57,6 @@ function getTodaysWeather(location) {
   .then(response => {
     const todaysData = response
     showTodaysWeather(todaysData)
-    console.log(todaysData)
   })
   .catch(error => {
     console.log(error.message)
@@ -73,7 +72,10 @@ function showTodaysWeather(todaysData) {
   const locDateDisplay = document.createElement('div')
   const locationDisplay = document.createElement('h2')
   locationDisplay.setAttribute('id', 'currentLocation')
-  const location = todaysData.address.charAt(0).toUpperCase() + todaysData.address.slice(1)
+  const name = todaysData.address.split(' ')
+  const location = name.map((words) => {
+    return words[0].toUpperCase() + words.substring(1)
+  }).join(' ')
   locationDisplay.textContent = `${location}`
   locDateDisplay.appendChild(locationDisplay)
 
@@ -105,7 +107,6 @@ async function getHourlyWeather(location) {
   try {
     const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/today/tomorrow?unitGroup=metric&key=2NAYMJYFN8NULALDR9TTEXV57`, {mode: 'cors'})
     const hourlyData = await response.json()
-    console.log(hourlyData)
     if (!response.ok) {
       console.log('Network response failed.')
     }
@@ -164,7 +165,6 @@ function getWeeklyWeather(location) {
   .then(response => {
     const weeklyData = response
     showWeeklyWeather(weeklyData)
-    console.log(weeklyData)
   })
   .catch(error => {
     console.log(error.message)
@@ -180,7 +180,7 @@ function showWeeklyWeather(weeklyData) {
 
     const dateDisplay = document.createElement('h4')
     const newDate = new Date(weeklyData.days[d].datetime)
-    const dateString = newDate.toDateString().slice(4, -5)
+    const dateString = newDate.toDateString().slice(0, 4) + newDate.toDateString().slice(8, -4)
     dateDisplay.textContent = `${dateString}`
     weeklyContainer.appendChild(dateDisplay)
     
@@ -206,7 +206,6 @@ async function getFortnightWeather(location) {
   try {
     const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=2NAYMJYFN8NULALDR9TTEXV57`, {mode: 'cors'})
     const fortnightData = await response.json()
-    console.log(fortnightData)
     if (!response.ok) {
         console.log('Network response failed.')
       }
@@ -225,7 +224,7 @@ function showFortnightWeather(fortnightData) {
 
     const dateDisplay = document.createElement('h4')
     const newDate = new Date(fortnightData.days[d].datetime)
-    const dateString = newDate.toDateString().slice(4, -5)
+    const dateString = newDate.toDateString().slice(0, 4) + newDate.toDateString().slice(8, -4)
     dateDisplay.textContent = `${dateString}`
     fortnightContainer.appendChild(dateDisplay)
     
