@@ -8,16 +8,18 @@
     <title>Weather App</title>
 </head>
 <body>
+    <div id="todaysWeatherDisplay"></div>
     <form>
         <input type="text" id="locationSearch" placeholder="Enter a location">
         <button type="submit" id="locationBtn">Search</button>
     </form>
-    <div id="todaysWeatherDisplay"></div>
     <div id="buttons">
-        <button>Hourly</button>
-        <button>7 days</button>
-        <button>15 days</button>
+        <button id="hourlyBtn">Hourly</button>
+        <button id="weeklyBtn">7 days</button>
+        <button id="fortnightBtn">15 days</button>
     </div>
-    <div id="weatherDisplay"></div>
+    <div id="hourlyDisplay"></div>
+    <div id="weeklyDisplay"></div>
+    <div id="fortnightDisplay"></div>
 </body>
 </html>
